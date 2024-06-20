@@ -89,3 +89,10 @@ VALUES
     (2, 19, 1),
     (1, 20, 2);
 
+    INSERT INTO transportadora (nome, telefone)
+    VALUES
+        ('Breda', '1599999999'),
+        ('JadLog', '1588888888'),
+        ('Correios', '1577777777'),
+        ('Fedex', '1566666666'),
+        ('Dhl', '1555555555');
