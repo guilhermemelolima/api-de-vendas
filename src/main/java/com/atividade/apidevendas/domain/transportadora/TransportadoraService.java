@@ -24,16 +24,19 @@ public class TransportadoraService {
         return transportadoraRepository.save(transportadora);
     }
 
-    public Transportadora atualizarTransportadora(Long id, Transportadora transportadora){
-        Transportadora transportadoraCadastrado = buscarTransportadoraPorId(id);
-        if(transportadoraCadastrado == null){
-            return null;
+    public Transportadora atualizarTransportadora(Transportadora transportadora){
+
+        if(buscarTransportadoraPorId(transportadora.getId())!=null){
+            Transportadora transportadoraCadastrado = buscarTransportadoraPorId(transportadora.getId());
+
+            transportadoraCadastrado.setNome(transportadora.getNome());
+            transportadoraCadastrado.setNome(transportadora.getNome());
+            transportadoraCadastrado.setTelefone(transportadora.getTelefone());
+
+            return transportadoraRepository.save(transportadoraCadastrado);
         }
         else{
-            transportadoraCadastrado.setNome(transportadora.getNome());
-            transportadoraCadastrado.setEmail(transportadora.getEmail());
-            transportadoraCadastrado.setCep(transportadora.getCep());
-            return transportadoraRepository.save(transportadoraCadastrado);
+            throw new IllegalArgumentException(" Trasportadora não encontrada ");
         }
     }
 
