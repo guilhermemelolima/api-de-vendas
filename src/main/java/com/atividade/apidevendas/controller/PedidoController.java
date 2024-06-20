@@ -26,7 +26,7 @@ public class PedidoController {
         return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/data")
+    @GetMapping("/pedidos")
     public ResponseEntity<List<PedidoDto>> buscarPedidosPorData(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
