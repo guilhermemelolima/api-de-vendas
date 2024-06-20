@@ -9,5 +9,4 @@ public class TransportadoraDto {
     private Long id;
     private String nome;
     private String telefone;
-
 }

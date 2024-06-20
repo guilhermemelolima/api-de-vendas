@@ -1,6 +1,7 @@
 package com.atividade.apidevendas.domain.transportadora;
 
 import com.atividade.apidevendas.domain.cliente.ClienteRepository;
+import com.atividade.apidevendas.entities.Transportadora;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,46 +10,39 @@ import java.util.List;
 @Service
 public class TransportadoraService {
     @Autowired
-    private TransportadoraRepository transportadoraRepositoryRepository;
+    private TransportadoraRepository transportadoraRepository;
 
-    public List<Cliente> listarClientes(){
-        return clienteRepository.findAll();
+    public List<Transportadora> listarTransportadoras(){
+        return transportadoraRepository.findAll();
     }
 
-    public Cliente buscarClientePorId(Long id){
-        return clienteRepository.findById(id).orElse(null);
+    public Transportadora buscarTransportadoraPorId(Long id){
+        return transportadoraRepository.findById(id).orElse(null);
     }
 
-    public List<Cliente> buscarClientesPorNome(String nome){ return clienteRepository.findByName(nome); }
-
-    public List<Pedido> buscarPedidosPeloClienteId(Long id){
-        return clienteRepository.buscarPedidosPeloClienteId(id);
+    public Transportadora salvarTransportadora(Transportadora transportadora){
+        return transportadoraRepository.save(transportadora);
     }
 
-    public Cliente salvarCliente(Cliente cliente){
-        return clienteRepository.save(cliente);
-    }
-
-    public Cliente atualizarCliente(Long id, Cliente cliente){
-        Cliente clienteCadastrado = buscarClientePorId(id);
-        if(clienteCadastrado == null){
+    public Transportadora atualizarTransportadora(Long id, Transportadora transportadora){
+        Transportadora transportadoraCadastrado = buscarTransportadoraPorId(id);
+        if(transportadoraCadastrado == null){
             return null;
         }
         else{
-            clienteCadastrado.setNome(cliente.getNome());
-            clienteCadastrado.setEmail(cliente.getEmail());
-            clienteCadastrado.setCep(cliente.getCep());
-            clienteCadastrado.setNumero(cliente.getNumero());
-            return clienteRepository.save(clienteCadastrado);
+            transportadoraCadastrado.setNome(transportadora.getNome());
+            transportadoraCadastrado.setEmail(transportadora.getEmail());
+            transportadoraCadastrado.setCep(transportadora.getCep());
+            return transportadoraRepository.save(transportadoraCadastrado);
         }
     }
 
-    public void excluirCliente(Long id){
-        if(buscarClientePorId(id) != null){
-            clienteRepository.deleteById(id);
+    public void excluirTransportadora(Long id){
+        if(buscarTransportadoraPorId(id) != null){
+            transportadoraRepository.deleteById(id);
         }
         else {
-            throw new IllegalArgumentException("Cliente informado não encontrado");
+            throw new IllegalArgumentException("Transportadora informada não encontrada");
         }
     }
 }
